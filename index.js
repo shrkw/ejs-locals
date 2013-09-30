@@ -439,9 +439,16 @@ function block(name, html) {
 }
 
 // bound to scripts Block in renderFile
-function script(path, type) {
+function script(path, type, attrs) {
+  if (attrs) {
+    var attr_s = '';
+    for ( var key in attrs ) {
+      var val = attrs[key];
+      attr_s = attr_s + " " + key + '="' + val + '"';
+    }
+  }
   if (path) {
-    this.append('<script src="'+path+'"'+(type ? ' type="'+type+'"' : '')+'></script>');
+    this.append('<script src="'+path+'"'+(type ? ' type="'+type+'"' : '')+attr_s+'></script>');
   }
   return this;
 }
